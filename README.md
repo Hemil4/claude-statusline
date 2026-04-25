@@ -109,9 +109,19 @@ If you run Claude Code inside WSL, use the bash version:
 
 ---
 
-## What You See
+## Layout Modes
 
-The status line adapts to your terminal width:
+By default, the status line shows the **wide** layout (best for most terminals).
+
+To use a different layout, set the env var in your shell:
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export CLAUDE_STATUSLINE_LAYOUT=medium   # or: wide, narrow, tiny
+```
+
+> **Why an env var?** Claude Code doesn't pass terminal width to statusline scripts ([#5430](https://github.com/anthropics/claude-code/issues/5430), [#22115](https://github.com/anthropics/claude-code/issues/22115)), so auto-detection isn't possible inside the subprocess.
+
+## Layout Examples
 
 ### Wide terminal (120+ chars)
 ```
