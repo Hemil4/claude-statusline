@@ -63,8 +63,23 @@ chmod +x ~/.claude/claude-statusline.sh
 <summary><strong>Requirements</strong></summary>
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (v2.0+)
-- [jq](https://jqlang.github.io/jq/) — `brew install jq`
-- macOS or Linux
+- [jq](https://jqlang.github.io/jq/) — `brew install jq` (macOS) or `sudo apt install jq` (Linux/WSL)
+- macOS, Linux, or Windows (via WSL)
+
+</details>
+
+<details>
+<summary><strong>Windows users</strong></summary>
+
+This tool requires bash, so it doesn't run natively on PowerShell or CMD. Use **WSL (Windows Subsystem for Linux)** instead:
+
+1. [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install) if you haven't: `wsl --install`
+2. Open your WSL terminal
+3. Install jq: `sudo apt install jq`
+4. Run the install command above
+5. Use Claude Code from within WSL
+
+Most Windows developers using Claude Code already run it in WSL — so this should just work.
 
 </details>
 
