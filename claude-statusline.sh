@@ -40,8 +40,19 @@ short_model() {
 MODEL_SHORT=$(short_model "$MODEL")
 
 # ── Terminal width ───────────────────────────────────────────────────────
+# Claude Code runs this as a piped subprocess (no TTY), so $COLUMNS and
+# tput both fail. Try stty via /dev/tty as fallback, then default wide.
 
-COLS="${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}"
+COLS="${COLUMNS:-0}"
+if [ "$COLS" -eq 0 ]; then
+    COLS=$(tput cols 2>/dev/null || echo 0)
+fi
+if [ "$COLS" -eq 0 ]; then
+    COLS=$(stty size < /dev/tty 2>/dev/null | awk '{print $2}' || echo 0)
+fi
+if [ "$COLS" -eq 0 ]; then
+    COLS=120  # default to wide — most terminals are 120+ in fullscreen
+fi
 
 # ── Colors ───────────────────────────────────────────────────────────────
 
