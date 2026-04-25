@@ -5,7 +5,7 @@
     See your limits without typing <code>/usage</code>.
   </p>
   <p align="center">
-    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue" alt="Platform">
+    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-blue" alt="Platform">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
     <img src="https://img.shields.io/badge/shell-bash-yellow" alt="Shell">
     <img src="https://img.shields.io/badge/requires-jq-orange" alt="Requires jq">
@@ -63,23 +63,47 @@ chmod +x ~/.claude/claude-statusline.sh
 <summary><strong>Requirements</strong></summary>
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (v2.0+)
-- [jq](https://jqlang.github.io/jq/) — `brew install jq` (macOS) or `sudo apt install jq` (Linux/WSL)
-- macOS, Linux, or Windows (via WSL)
+- macOS, Linux, or Windows
+
+**macOS/Linux:** requires [jq](https://jqlang.github.io/jq/) — `brew install jq` or `sudo apt install jq`
+
+**Windows (PowerShell):** no extra dependencies — uses built-in `ConvertFrom-Json`
 
 </details>
 
 <details>
-<summary><strong>Windows users</strong></summary>
+<summary><strong>Windows install (native PowerShell)</strong></summary>
 
-This tool requires bash, so it doesn't run natively on PowerShell or CMD. Use **WSL (Windows Subsystem for Linux)** instead:
+```powershell
+# Download the PowerShell script
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hemil4/claude-statusline/main/claude-statusline.ps1" -OutFile "$HOME\.claude\claude-statusline.ps1"
+```
+
+Then add to `~\.claude\settings.json`:
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -NoProfile -File \"%USERPROFILE%\\.claude\\claude-statusline.ps1\"",
+    "refreshInterval": 10
+  }
+}
+```
+
+Restart Claude Code.
+
+</details>
+
+<details>
+<summary><strong>Windows install (via WSL)</strong></summary>
+
+If you run Claude Code inside WSL, use the bash version:
 
 1. [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install) if you haven't: `wsl --install`
 2. Open your WSL terminal
 3. Install jq: `sudo apt install jq`
-4. Run the install command above
-5. Use Claude Code from within WSL
-
-Most Windows developers using Claude Code already run it in WSL — so this should just work.
+4. Run the one-command install above
+5. Restart Claude Code
 
 </details>
 
